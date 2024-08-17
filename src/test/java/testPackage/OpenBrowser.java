@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
-public class FirstTestClass {
+public class OpenBrowser {
     @Test
     public void firstTestMethod()
     {
@@ -12,5 +12,4 @@ public class FirstTestClass {
         driver.get("https://www.google.com/");
         driver.quit();
     }
-
 }

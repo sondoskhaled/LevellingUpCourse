@@ -3,6 +3,7 @@ package testPackage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertTrue;
 
@@ -13,6 +14,16 @@ public class TestBase {
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.google.com/");
         driver.quit();
+    }
+    @Test
+    public void verifyTabTitle()
+    {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.google.com/");
+        String tabTitle = driver.getTitle();
+        Assert.assertEquals(tabTitle,"Google");
+        driver.quit();
+
     }
     @Test
     public void verifyGoogleLogo()

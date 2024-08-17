@@ -46,7 +46,11 @@ public class TestBase {
         searchField.sendKeys(Keys.ENTER);
         // Wait until the page is fully loaded
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until((ExpectedCondition<Boolean>) driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+        wait.until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+            }
+        });
         List<WebElement> searchResult =driver.findElements(By.xpath("//div[@id='search']//div[last()]//h3"));
         String firstResult = searchResult.getFirst().getText();
         Assert.assertEquals(firstResult , "WebDriver - Selenium");

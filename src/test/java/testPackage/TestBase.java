@@ -2,18 +2,15 @@ package testPackage;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
-import java.time.Duration;
-import java.util.List;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import java.time.Duration;
 import static org.testng.Assert.assertTrue;
 
 public class TestBase {
     WebDriver driver;
+    WebDriverWait wait;
     @BeforeClass
     public void setUp(){
           this.driver = new ChromeDriver();
@@ -21,6 +18,8 @@ public class TestBase {
           driver.manage().window().setSize(new Dimension(1920,1083)); // or 1080 , 720
 //        another way to control screen size
 //        driver.manage().window().maximize();
+          this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
     }
     @Test
     public void goToGoogle()
@@ -49,15 +48,10 @@ public class TestBase {
         WebElement searchField = driver.findElement(By.id("APjFqb"));
         searchField.sendKeys("Selenium WebDriver");
         searchField.sendKeys(Keys.ENTER);
-        // Wait until the page is fully loaded
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver driver) {
-                return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
-            }
+        // Wait until the element is displayed
+        String firstResult = wait.until(d-> {
+            return driver.findElement(By.xpath("(//div[@class='yuRUbf']//a//h3)[1]")).getText();
         });
-        List<WebElement> searchResult =driver.findElements(By.xpath("//div[@id='search']//div[last()]//h3"));
-        String firstResult = searchResult.getFirst().getText();
         Assert.assertEquals(firstResult , "WebDriver");
 
     }

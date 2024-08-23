@@ -23,6 +23,7 @@ public class FireFoxBrowser {
     }
     @Test
     public void verifySearchResult(){
+        driver.manage().window().maximize();
         driver.get("https://www.google.com/ncr");
         WebElement searchField = driver.findElement(By.id("APjFqb"));
         searchField.sendKeys("TestNG");

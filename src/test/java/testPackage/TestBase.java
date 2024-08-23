@@ -21,11 +21,16 @@ public class TestBase {
     @Test
     public void goToGoogle()
     {
+        driver.manage().window().maximize();
+//        another way to control screen size
+//        driver.manage().window().setPosition(new Point(0,0));
+//        driver.manage().window().setSize(new Dimension(1920,1083)); // or 1080 , 720
         driver.get("https://www.google.com/ncr");
     }
     @Test
     public void verifyTabTitle()
     {
+        driver.manage().window().maximize();
         driver.get("https://www.google.com/ncr");
         String tabTitle = driver.getTitle();
         Assert.assertEquals(tabTitle,"Google");
@@ -33,6 +38,7 @@ public class TestBase {
     @Test
     public void verifyGoogleLogo()
     {
+        driver.manage().window().maximize();
         driver.get("https://www.google.com/ncr");
         boolean isLogoVisible = driver.findElement(By.className("lnXdpd")).isDisplayed();
         assertTrue(isLogoVisible);
@@ -40,6 +46,7 @@ public class TestBase {
 
     @Test
     public void verifySearchResult(){
+        driver.manage().window().maximize();
         driver.get("https://www.google.com/ncr");
         WebElement searchField = driver.findElement(By.id("APjFqb"));
         searchField.sendKeys("Selenium WebDriver");

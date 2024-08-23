@@ -16,15 +16,15 @@ public class TestBase {
     WebDriver driver;
     @BeforeClass
     public void setUp(){
-        this.driver = new ChromeDriver();
+          this.driver = new ChromeDriver();
+          driver.manage().window().setPosition(new Point(0,0));
+          driver.manage().window().setSize(new Dimension(1920,1083)); // or 1080 , 720
+//        another way to control screen size
+//        driver.manage().window().maximize();
     }
     @Test
     public void goToGoogle()
     {
-        driver.manage().window().maximize();
-//        another way to control screen size
-//        driver.manage().window().setPosition(new Point(0,0));
-//        driver.manage().window().setSize(new Dimension(1920,1083)); // or 1080 , 720
         driver.get("https://www.google.com/ncr");
     }
     @Test
@@ -38,7 +38,6 @@ public class TestBase {
     @Test
     public void verifyGoogleLogo()
     {
-        driver.manage().window().maximize();
         driver.get("https://www.google.com/ncr");
         boolean isLogoVisible = driver.findElement(By.className("lnXdpd")).isDisplayed();
         assertTrue(isLogoVisible);
@@ -46,7 +45,6 @@ public class TestBase {
 
     @Test
     public void verifySearchResult(){
-        driver.manage().window().maximize();
         driver.get("https://www.google.com/ncr");
         WebElement searchField = driver.findElement(By.id("APjFqb"));
         searchField.sendKeys("Selenium WebDriver");
@@ -60,7 +58,7 @@ public class TestBase {
         });
         List<WebElement> searchResult =driver.findElements(By.xpath("//div[@id='search']//div[last()]//h3"));
         String firstResult = searchResult.getFirst().getText();
-        Assert.assertEquals(firstResult , "WebDriver - Selenium");
+        Assert.assertEquals(firstResult , "WebDriver");
 
     }
     @AfterClass

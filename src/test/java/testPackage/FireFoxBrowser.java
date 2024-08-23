@@ -20,10 +20,13 @@ public class FireFoxBrowser {
         this.options = new FirefoxOptions();
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         this.driver = new FirefoxDriver(options);
+        driver.manage().window().setPosition(new Point(0,0));
+        driver.manage().window().setSize(new Dimension(1920,1083)); // or 1080 , 720
+//        another way to control screen size
+//        driver.manage().window().maximize();
     }
     @Test
     public void verifySearchResult(){
-        driver.manage().window().maximize();
         driver.get("https://www.google.com/ncr");
         WebElement searchField = driver.findElement(By.id("APjFqb"));
         searchField.sendKeys("TestNG");

@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import static org.testng.Assert.assertTrue;
 
-public class TestBase {
+public class Tasks123Tests {
     WebDriver driver;
     WebDriverWait wait;
     @BeforeClass
@@ -48,11 +48,9 @@ public class TestBase {
         WebElement searchField = driver.findElement(By.id("APjFqb"));
         searchField.sendKeys("Selenium WebDriver");
         searchField.sendKeys(Keys.ENTER);
-        // Wait until the element is displayed
-        String firstResult = wait.until(d-> {
-            return driver.findElement(By.xpath("(//div[@class='yuRUbf']//a//h3)[1]")).getText();
-        });
-        Assert.assertEquals(firstResult , "WebDriver");
+        // Wait until the element is displayed using explicit wait
+        String firstResult = wait.until(d-> driver.findElement(By.xpath("(//div[@class='yuRUbf']//a//h3)[1]")).getText());
+        Assert.assertEquals(firstResult , "Selenium - Web Browser Automation");
 
     }
     @AfterClass

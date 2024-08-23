@@ -2,6 +2,8 @@ package testPackage;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -9,9 +11,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.time.Duration;
 
-public class FireFoxBrowser {
+public class Task4Tests {
     WebDriver driver;
-    WebDriverWait wait;
+    Wait<WebDriver> wait;
     @BeforeClass
 
     public void setUp(){
@@ -21,7 +23,12 @@ public class FireFoxBrowser {
         driver.manage().window().setSize(new Dimension(1920,1083)); // or 1080 , 720
 //        another way to control screen size
 //        driver.manage().window().maximize();
-         this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        this.wait =
+                new FluentWait<>(driver)
+                        .withTimeout(Duration.ofSeconds(2))
+                        .pollingEvery(Duration.ofMillis(300))
+                        .ignoring(NotFoundException.class)
+                        .ignoring(StaleElementReferenceException.class);
     }
     @Test
     public void verifySearchResult(){
@@ -30,10 +37,8 @@ public class FireFoxBrowser {
         searchField.sendKeys("TestNG");
         searchField.sendKeys(Keys.ENTER);
 
-        // Wait until the element is displayed
-        String forthResult = wait.until(d-> {
-            return driver.findElement(By.xpath("(//div[@class='yuRUbf']//a//h3[not(ancestor::div[contains(@class,'Wt5Tfe')])])[4]")).getText();
-        });
+        // Wait until the element is displayed using fluent wait
+        String forthResult = wait.until(d-> driver.findElement(By.xpath("(//div[@class='yuRUbf']//a//h3[not(ancestor::div[contains(@class,'Wt5Tfe')])])[4]")).getText());
         Assert.assertEquals(forthResult , "TestNG Tutorial");
 
     }

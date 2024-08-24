@@ -4,7 +4,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -38,7 +37,7 @@ public class Task4Tests {
         searchField.sendKeys(Keys.ENTER);
 
         // Wait until the element is displayed using fluent wait
-        String forthResult = wait.until(d-> driver.findElement(By.xpath("(//div[@class='yuRUbf']//a//h3[not(ancestor::div[contains(@class,'Wt5Tfe')])])[4]")).getText());
+        String forthResult = wait.until(d-> driver.findElement(By.xpath("(//div[contains(@class,'yuRUbf')]//h3[not(ancestor::div[contains(@class,'Wt5Tfe')])])[4]")).getText());
         Assert.assertEquals(forthResult , "TestNG Tutorial");
 
     }

@@ -49,7 +49,7 @@ public class Tasks123Tests {
         searchField.sendKeys("Selenium WebDriver");
         searchField.sendKeys(Keys.ENTER);
         // Wait until the element is displayed using explicit wait
-        String firstResult = wait.until(d-> driver.findElement(By.xpath("(//div[@class='yuRUbf']//a//h3)[1]")).getText());
+        String firstResult = wait.until(d-> driver.findElement(By.xpath("(//div[@class='yuRUbf']//h3)[1]")).getText());
         Assert.assertEquals(firstResult , "Selenium - Web Browser Automation");
 
     }

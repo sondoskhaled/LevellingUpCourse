@@ -31,7 +31,7 @@ public class Task4Tests {
     }
     @Test
     public void verifySearchResult(){
-        driver.get("https://www.google.com/ncr");
+        driver.navigate().to("https://www.google.com/ncr");
         WebElement searchField = driver.findElement(By.id("APjFqb"));
         searchField.sendKeys("TestNG");
         searchField.sendKeys(Keys.ENTER);

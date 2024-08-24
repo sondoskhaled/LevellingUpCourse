@@ -24,27 +24,27 @@ public class Tasks123Tests {
     @Test
     public void goToGoogle()
     {
-        driver.get("https://www.google.com/ncr");
+        driver.navigate().to("https://www.google.com/ncr");
     }
     @Test
     public void verifyTabTitle()
     {
         driver.manage().window().maximize();
-        driver.get("https://www.google.com/ncr");
+        driver.navigate().to("https://www.google.com/ncr");
         String tabTitle = driver.getTitle();
         Assert.assertEquals(tabTitle,"Google");
     }
     @Test
     public void verifyGoogleLogo()
     {
-        driver.get("https://www.google.com/ncr");
+        driver.navigate().to("https://www.google.com/ncr");
         boolean isLogoVisible = driver.findElement(By.className("lnXdpd")).isDisplayed();
         assertTrue(isLogoVisible);
     }
 
     @Test
     public void verifySearchResult(){
-        driver.get("https://www.google.com/ncr");
+        driver.navigate().to("https://www.google.com/ncr");
         WebElement searchField = driver.findElement(By.id("APjFqb"));
         searchField.sendKeys("Selenium WebDriver");
         searchField.sendKeys(Keys.ENTER);

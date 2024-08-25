@@ -1,4 +1,4 @@
-package testPackage;
+package testPackage.linear;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,8 +16,6 @@ public class Tasks123Tests {
           this.driver = new ChromeDriver();
           driver.manage().window().setPosition(new Point(0,0));
           driver.manage().window().setSize(new Dimension(1920,1083)); // or 1080 , 720
-//        another way to control screen size
-//        driver.manage().window().maximize();
           this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
     }

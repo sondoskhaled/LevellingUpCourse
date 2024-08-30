@@ -31,7 +31,7 @@ public class Task5Tests {
         landingPage.navigate();
     }
 
-    @Test(description = "verify that when user search with 'Cucumber IO' the second result link is ")
+    @Test(description = "verify that when user search with 'Cucumber IO' the second result link is https://www.linkedin.com")
     public void verifySecondSearchResultLink(){
         landingPage.search("Cucumber IO");
         String secondResultLink = wait.until(d->searchResultPage.getSecondResultLink());

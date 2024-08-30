@@ -5,8 +5,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 public class LandingPage {
-    WebDriver driver;
-    By searchField = By.xpath("//input[@id = 'searchbox_input']");
+    private final WebDriver driver;
+    private final By searchField = By.xpath("//input[@id = 'searchbox_input']");
     public LandingPage (WebDriver driver){
         this.driver=driver;
     }

@@ -1,4 +1,4 @@
-package testPackage.modular;
+package testPackage.modular.pom;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;

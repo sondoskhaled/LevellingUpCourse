@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class SearchResultPage {
-    WebDriver driver ;
-    By firstResultLink = By.xpath("(//article)[1]//h2//a");
-    By forthResultText = By.xpath("(//article)[4]//h2");
-
+    private final WebDriver driver ;
+    private final By firstResultLink = By.xpath("(//article)[1]//h2//a");
+    private final By forthResultText = By.xpath("(//article)[4]//h2");
+    private final By secondResultLink = By.xpath("(//article)[1]//h2//a");
     public SearchResultPage (WebDriver driver){
         this.driver = driver ;
     }
@@ -16,5 +16,8 @@ public class SearchResultPage {
     }
     public String getForthResultText(){
         return driver.findElement(forthResultText).getText();
+    }
+    public String getSecondResultLink(){
+        return driver.findElement(secondResultLink).getAttribute("href");
     }
 }

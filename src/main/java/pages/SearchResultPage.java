@@ -7,7 +7,7 @@ public class SearchResultPage {
     private final WebDriver driver ;
     private final By firstResultLink = By.xpath("(//article)[1]//h2//a");
     private final By forthResultText = By.xpath("(//article)[4]//h2");
-    private final By secondResultLink = By.xpath("(//article)[1]//h2//a");
+    private final By secondResultLink = By.xpath("(//article)[2]//h2//a");
     public SearchResultPage (WebDriver driver){
         this.driver = driver ;
     }

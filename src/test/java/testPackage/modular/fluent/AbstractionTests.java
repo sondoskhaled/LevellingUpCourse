@@ -12,6 +12,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.w3c.dom.Document;
@@ -22,6 +23,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class AbstractionTests {
@@ -29,7 +31,24 @@ public class AbstractionTests {
     @BeforeClass
     public void setUp ()
     {
-        driver = new ChromeDriver();
+        // Load the properties file
+        Properties properties = new Properties();
+        try (FileInputStream fileInput = new FileInputStream("src/test/resources/config.properties")) {
+            properties.load(fileInput);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Get the TargetBrowser from the properties file
+        String targetBrowser = properties.getProperty("TargetBrowser");
+
+        // Set up WebDriver based on the TargetBrowser value
+        if (targetBrowser.equalsIgnoreCase("Chrome")) {
+            this.driver = new ChromeDriver();
+        } else if (targetBrowser.equalsIgnoreCase("Firefox")) {
+            this.driver = new FirefoxDriver();
+        } else {
+            throw new IllegalArgumentException("Unsupported browser: " + targetBrowser);
+        }
         driver.manage().window().setPosition(new Point(0,0));
         driver.manage().window().setSize(new Dimension(1080 , 720));
     }

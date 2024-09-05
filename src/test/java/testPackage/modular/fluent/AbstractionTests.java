@@ -1,6 +1,5 @@
 package testPackage.modular.fluent;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.poi.ss.usermodel.Cell;
@@ -16,7 +15,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -108,7 +106,6 @@ public class AbstractionTests {
     }
 
     public static JsonObject readJsonFromFile(String filePath) {
-        Gson gson = new Gson();
         JsonObject jsonObject = null;
 
         try (FileReader reader = new FileReader(filePath)) {

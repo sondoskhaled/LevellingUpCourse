@@ -1,0 +1,7 @@
+<testData>
+    <data>
+        <query>Selenium WebDriver</query>
+        <index>1</index>
+        <expectedResult>https://www.selenium.dev/documentation/webdriver/</expectedResult>
+    </data>
+</testData>

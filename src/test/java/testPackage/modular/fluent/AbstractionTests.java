@@ -14,7 +14,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -36,7 +42,30 @@ public class AbstractionTests {
         driver.quit();
     }
 
+    public static NodeList readXMLData(String filePath , String nodeTagName) {
+        NodeList nodeList = null;
+        try {
+            // Create a DocumentBuilderFactory and DocumentBuilder
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
 
+            // Parse the XML file into a Document object
+            Document document = builder.parse(new File(filePath));
+            document.getDocumentElement().normalize(); // Normalize the XML structure
+
+            // Get the root element
+            Element root = document.getDocumentElement();
+            System.out.println("Root Element: " + root.getNodeName());
+
+            // Get all 'user' nodes
+            nodeList = document.getElementsByTagName(nodeTagName);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return nodeList;
+    }
 
     public static List<List<String>> readExcelData(String filePath, String sheetName) {
         List<List<String>> excelData = new ArrayList<>();

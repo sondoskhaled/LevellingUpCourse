@@ -17,15 +17,12 @@ import org.testng.annotations.BeforeClass;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class AbstractionTests {
     WebDriver driver;
@@ -42,6 +39,19 @@ public class AbstractionTests {
         driver.quit();
     }
 
+    // Method to read the text file and process each line
+    public static String readTextFile(String filePath) {
+        String line = null;
+        try (Scanner scanner = new Scanner(new File(filePath))) {
+            while (scanner.hasNextLine()) {
+                line = scanner.nextLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return line;
+    }
+
     public static NodeList readXMLData(String filePath , String nodeTagName) {
         NodeList nodeList = null;
         try {
@@ -52,10 +62,6 @@ public class AbstractionTests {
             // Parse the XML file into a Document object
             Document document = builder.parse(new File(filePath));
             document.getDocumentElement().normalize(); // Normalize the XML structure
-
-            // Get the root element
-            Element root = document.getDocumentElement();
-            System.out.println("Root Element: " + root.getNodeName());
 
             // Get all 'user' nodes
             nodeList = document.getElementsByTagName(nodeTagName);

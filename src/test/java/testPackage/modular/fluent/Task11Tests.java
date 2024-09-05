@@ -14,6 +14,7 @@ public class Task11Tests extends AbstractionTests{
     static JsonObject data;
     static List<List<String>> excelData ;
     static NodeList nodeList;
+    static String line;
     String query;
     String indexStr;
     String expectedResult;
@@ -21,11 +22,30 @@ public class Task11Tests extends AbstractionTests{
     @BeforeClass
     public void setUpClass (){
          data = readJsonFromFile("src/test/resources/testData/TestData.json");
+
          excelData = readExcelData(
                  "src/test/resources/testData/TestData2.xlsx",
                  "TestData2");
+
          nodeList = readXMLData("src/test/resources/testData/TestData.xml" , "data");
 
+         line =readTextFile("src/test/resources/testData/TestData.txt");
+
+    }
+
+    @Test(description = "verify the first search result link and read index, search query and expected result from text file")
+    public void verifyFirstSearchResultLinkTxt(){
+        String[] values = line.split(",");
+        query = values[0];
+        indexStr = values[1];
+        expectedResult = values[2];
+        double doubleValue = Double.parseDouble(indexStr);
+        int index = (int) doubleValue;
+
+        new LandingPage(driver)
+                .navigate()
+                .search(query)
+                .checkSearchResultLink(index , expectedResult);
     }
 
     @Test(description = "verify the first search result link and read index, search query and expected result from excel file")
@@ -49,6 +69,7 @@ public class Task11Tests extends AbstractionTests{
                 .search(query)
                 .checkSearchResultLink(index ,expectedResult);
     }
+
     @Test(description = "verify the first search result link and read index, search query and expected result from excel file")
     public void verifyFirstSearchResultLinkExcel(){
         query = excelData.get(1).get(0);

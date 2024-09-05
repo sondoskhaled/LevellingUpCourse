@@ -13,7 +13,7 @@ public class LandingPage {
     private final WebDriver driver;
     Wait<WebDriver> wait;
     private final By searchField = By.xpath("//input[@id = 'searchbox_input']");
-    private final By logo = By.xpath("(//a/img)[1]");
+    private final By logo = By.xpath("(//a/img)[2]");
     public LandingPage (WebDriver driver){
         this.driver=driver;
         this.wait =
